@@ -1,7 +1,27 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-const ZoomImage = ({ src, fadeDuration, top, left, isZoomed, onLoad, onDragStart, onDragEnd, onClose, onFadeOut }) => {
+const ZoomImage = ({
+  src,
+  fadeDuration,
+  top,
+  left,
+  zoomWidth,
+  zoomHeight,
+  isZoomed,
+  onLoad,
+  onDragStart,
+  onDragEnd,
+  onClose,
+  onFadeOut
+}) => {
+  let dimAttributes = {};
+  if (zoomWidth && zoomHeight) {
+    dimAttributes = {
+      width: zoomWidth,
+      height: zoomHeight
+    };
+  }
   return (
     <Fragment>
       <img
@@ -9,7 +29,7 @@ const ZoomImage = ({ src, fadeDuration, top, left, isZoomed, onLoad, onDragStart
         style={{
           top: top,
           left: left,
-          transition: `linear ${fadeDuration}ms opacity, linear ${fadeDuration}ms visibility`
+          transition: `opacity ${fadeDuration}ms linear, visibility ${fadeDuration}ms linear`
         }}
         src={src}
         onLoad={onLoad}
@@ -20,13 +40,14 @@ const ZoomImage = ({ src, fadeDuration, top, left, isZoomed, onLoad, onDragStart
         onTransitionEnd={onFadeOut}
         draggable="false"
         alt=""
+        {...dimAttributes}
       />
 
       {onClose && (
         <button
           className={`iiz__btn iiz__close ${isZoomed ? 'iiz__close--visible' : ''}`}
           style={{
-            transition: `linear ${fadeDuration}ms opacity, linear ${fadeDuration}ms visibility`
+            transition: `opacity ${fadeDuration}ms linear, visibility ${fadeDuration}ms linear`
           }}
           onClick={onClose}
           aria-label="Zoom Out"
@@ -41,6 +62,8 @@ ZoomImage.propTypes = {
   fadeDuration: PropTypes.number,
   top: PropTypes.number,
   left: PropTypes.number,
+  zoomWidth: PropTypes.number,
+  zoomHeight: PropTypes.number,
   isZoomed: PropTypes.bool,
   onLoad: PropTypes.func,
   onDragStart: PropTypes.func,

@@ -76,6 +76,8 @@ hasSpacer | Boolean | false | If true, gets the original image's aspect ratio ba
 imgAttributes | Object | | [Img](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attributes) and [global](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes) attributes for the original image (excluding `src`, `width`, `height`, and `style` which are set elsewhere). The imgAttributes keys should follow the [React DOM element](https://reactjs.org/docs/dom-elements.html) naming conventions.
 zoomSrc | String | | URL for the larger zoom image. Falls back to original image src if not defined.
 zoomScale | Number | 1 | Multiplied against the natural width and height of the zoomed image. This will generally be a decimal (example, 0.9 for 90%).
+zoomWidth | Number | | Constant width of the zoomed image to use instead of the natural width (zoomScale is ignored).
+zoomHeight | Number | | Constant height of the zoomed image to use instead of the natural height (zoomScale is ignored).
 zoomPreload | Boolean | false | If set to true, preloads the zoom image instead of waiting for mouseenter and (unless on a touch device) persists the image on mouseleave.
 moveType | String | pan | `pan` or `drag`. The user behavior for moving zoomed images on non-touch devices.
 zoomType | String | click | `click` or `hover`. The user behavior for triggering zoom. When using `hover`, combine with `zoomPreload` to avoid flickering on rapid mouse movements.
